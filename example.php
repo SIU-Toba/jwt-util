@@ -20,7 +20,7 @@ $publicKey = 'server.pem';
 
 $encoder = new \SIU\JWT\Encoder($privateKey, $token);
 
-$auth = new \SIU\JWT\Auth(\SIU\JWT\Auth::ALG_RS256);
+$auth = new \SIU\JWT\JWTBase(\SIU\JWT\JWTBase::ALG_RS256);
 
 $auth->setEncoder($encoder);
 

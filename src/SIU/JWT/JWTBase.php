@@ -4,7 +4,7 @@ namespace SIU\JWT;
 
 use Firebase\JWT\JWT;
 
-class Auth
+class JWTBase
 {
     // JWT::$supported_algs
     const ALG_HS256 = 'HS256';
