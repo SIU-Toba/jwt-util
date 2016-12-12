@@ -3,6 +3,8 @@
 namespace SIU\JWT;
 
 use Firebase\JWT\JWT;
+use SIU\JWT\Encoder\AbstractEncoder;
+use SIU\JWT\Decoder\AbstractDecoder;
 
 class JWTBase
 {
@@ -36,12 +38,12 @@ class JWTBase
         $this->algorithm = $algorithm;
     }
 
-    public function setEncoder(Encoder $encoder)
+    public function setEncoder(AbstractEncoder $encoder)
     {
         $this->encoder = $encoder;
     }
 
-    public function setDecoder(Decoder $decoder)
+    public function setDecoder(AbstractDecoder $decoder)
     {
         $this->decoder = $decoder;
     }
@@ -60,26 +62,26 @@ class JWTBase
      */
     public function encode()
     {
-        if (!$this->encoder instanceof Encoder) {
+        if (!$this->encoder instanceof AbstractEncoder) {
             throw new \Exception('Debe setear un encoder primero.');
         }
 
-        return JWT::encode($this->encoder->getToken(), $this->encoder->readKey(), $this->getAlgorithm());
+        return JWT::encode($this->encoder->getToken(), $this->encoder->getKey(), $this->getAlgorithm());
     }
 
     /**
-     * Decodifica el $token según el decoder utilizado.
+     * Decodifica el token $jwt según el decoder configurado.
      *
-     * @return string el $token decodificado
+     * @return string el $jwt decodificado
      *
      * @throws \Exception si no se seteó un decoder
      */
     public function decode($jwt)
     {
-        if (!$this->decoder instanceof Decoder) {
+        if (!$this->decoder instanceof AbstractDecoder) {
             throw new \Exception('Debe setear un decoder primero.');
         }
 
-        return JWT::decode($jwt, $this->decoder->readKey(), array($this->getAlgorithm()));
+        return JWT::decode($jwt, $this->decoder->getKey(), array($this->getAlgorithm()));
     }
 }
