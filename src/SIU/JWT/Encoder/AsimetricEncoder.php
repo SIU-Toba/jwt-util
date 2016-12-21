@@ -10,13 +10,13 @@ class AsimetricEncoder extends AbstractEncoder
      *
      * @throws \Exception si no existe el archivo $keyFile
      */
-    public function __construct($key, $token)
+    public function __construct($algorithm, $key, $token)
     {
         if (!file_exists($key)) {
             throw new \Exception("No se encuentra el archivo de clave privada '$key'");
         }
 
-        parent::__construct($key, $token);
+        parent::__construct($algorithm, $key, $token);
     }
 
     /**

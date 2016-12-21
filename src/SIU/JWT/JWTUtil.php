@@ -6,7 +6,7 @@ use Firebase\JWT\JWT;
 use SIU\JWT\Encoder\AbstractEncoder;
 use SIU\JWT\Decoder\AbstractDecoder;
 
-class JWTBase
+class JWTUtil
 {
     // JWT::$supported_algs
     const ALG_HS256 = 'HS256';
@@ -16,27 +16,6 @@ class JWTBase
 
     private $encoder;
     private $decoder;
-    private $algorithm;
-
-    /**
-     * @param string $algorithm el algoritmo con el cual codificar/decodificar
-     *
-     * @throws \Exception si no se proporciona un algoritmo soportado
-     */
-    public function __construct($algorithm)
-    {
-        $supportedAlg = array_keys(JWT::$supported_algs);
-        if (!in_array($algorithm, $supportedAlg)) {
-            $message = sprintf(
-                "El algoritmo '%s' no es soportado. Utilizar: %s",
-                $algorithm,
-                implode(', ', $supportedAlg)
-            );
-            throw new \Exception($message);
-        }
-
-        $this->algorithm = $algorithm;
-    }
 
     public function setEncoder(AbstractEncoder $encoder)
     {
@@ -46,11 +25,6 @@ class JWTBase
     public function setDecoder(AbstractDecoder $decoder)
     {
         $this->decoder = $decoder;
-    }
-
-    public function getAlgorithm()
-    {
-        return $this->algorithm;
     }
 
     /**
@@ -66,7 +40,7 @@ class JWTBase
             throw new \Exception('Debe setear un encoder primero.');
         }
 
-        return JWT::encode($this->encoder->getToken(), $this->encoder->getKey(), $this->getAlgorithm());
+        return JWT::encode($this->encoder->getToken(), $this->encoder->getKey(), $this->encoder->getAlgorithm());
     }
 
     /**
@@ -82,6 +56,6 @@ class JWTBase
             throw new \Exception('Debe setear un decoder primero.');
         }
 
-        return JWT::decode($jwt, $this->decoder->getKey(), array($this->getAlgorithm()));
+        return JWT::decode($jwt, $this->decoder->getKey(), array($this->decoder->getAlgorithm()));
     }
 }
