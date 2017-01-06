@@ -1,5 +1,5 @@
 {
-    "name": "siu/jwt-util",
+    "name": "siu-toba/jwt-util",
     "description": "Una pequeña librería que autentica con Web Tokens JSON (JWT)",
     "homepage": "http://www.siu.edu.ar",
     "license": "SIU",
