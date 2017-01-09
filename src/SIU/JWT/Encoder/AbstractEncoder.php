@@ -12,12 +12,12 @@ abstract class AbstractEncoder
 
     /**
      * @param string $algorithm el algoritmo con el cual codificar/decodificar
-     * @param string $key   archivo de clave privada
-     * @param mixed  $token
+     * @param string $key       archivo de clave privada
+     * @param mixed  $token     los datos del token
      *
      * @throws \Exception si no se proporciona un algoritmo soportado
      */
-    public function __construct($algorithm, $key, $token)
+    public function __construct($algorithm, $key, $token = null)
     {
         $supportedAlg = array_keys(JWT::$supported_algs);
         if (!in_array($algorithm, $supportedAlg)) {
@@ -49,5 +49,10 @@ abstract class AbstractEncoder
     public function getToken()
     {
         return $this->token;
+    }
+
+    public function setToken($data)
+    {
+        $this->token = $data;
     }
 }

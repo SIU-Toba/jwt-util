@@ -6,7 +6,7 @@ use Firebase\JWT\JWT;
 use SIU\JWT\Encoder\AbstractEncoder;
 use SIU\JWT\Decoder\AbstractDecoder;
 
-class JWTUtil
+class Util
 {
     // JWT::$supported_algs
     const ALG_HS256 = 'HS256';

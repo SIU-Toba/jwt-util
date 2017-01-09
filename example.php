@@ -18,9 +18,9 @@ $publicKey = 'server.pem';
 
 echo "---------------------ASIMETRIC---------------------------------------\n";
 
-$asimetricEncoder = new \SIU\JWT\Encoder\AsimetricEncoder(\SIU\JWT\JWTUtil::ALG_RS256, $privateKey, $token);
+$asimetricEncoder = new \SIU\JWT\Encoder\AsimetricEncoder(\SIU\JWT\Util::ALG_RS256, $privateKey, $token);
 
-$auth = new \SIU\JWT\JWTUtil();
+$auth = new \SIU\JWT\Util();
 
 $auth->setEncoder($asimetricEncoder);
 
@@ -32,7 +32,7 @@ var_dump($jwt);
 
 // -------------------------------- server valida respuesta cliente -------
 
-$asimetricDecoder = new \SIU\JWT\Decoder\AsimetricDecoder(\SIU\JWT\JWTUtil::ALG_RS256, $publicKey);
+$asimetricDecoder = new \SIU\JWT\Decoder\AsimetricDecoder(\SIU\JWT\Util::ALG_RS256, $publicKey);
 
 $auth->setDecoder($asimetricDecoder);
 
@@ -43,9 +43,9 @@ var_dump($data);
 
 echo "---------------------SIMETRIC---------------------------------------\n";
 
-$simetricEncoder = new \SIU\JWT\Encoder\SimetricEncoder(\SIU\JWT\JWTUtil::ALG_HS512, $key, $token);
+$simetricEncoder = new \SIU\JWT\Encoder\SimetricEncoder(\SIU\JWT\Util::ALG_HS512, $key, $token);
 
-$auth2 = new \SIU\JWT\JWTUtil();
+$auth2 = new \SIU\JWT\Util();
 
 $auth2->setEncoder($simetricEncoder);
 
@@ -57,7 +57,7 @@ var_dump($jwt);
 
 // -------------------------------- server valida respuesta cliente -------
 
-$simetricDecoder = new \SIU\JWT\Decoder\SimetricDecoder(\SIU\JWT\JWTUtil::ALG_HS512, $key);
+$simetricDecoder = new \SIU\JWT\Decoder\SimetricDecoder(\SIU\JWT\Util::ALG_HS512, $key);
 
 $auth2->setDecoder($simetricDecoder);
 
