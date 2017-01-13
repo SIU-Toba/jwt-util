@@ -11,7 +11,7 @@ abstract class AbstractDecoder
 
     /**
      * @param string $algorithm el algoritmo con el cual codificar/decodificar
-     * @param string $key archivo de clave privada
+     * @param string $key       archivo de clave privada
      *
      * @throws \Exception si no se proporciona un algoritmo soportado
      */

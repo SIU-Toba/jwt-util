@@ -1,0 +1,19 @@
+<phpunit bootstrap="vendor/autoload.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false">
+    <testsuites>
+        <testsuite name="all">
+            <directory>./tests</directory>
+        </testsuite>
+        <testsuite name="simetric">
+            <directory>./tests/http</directory>
+        </testsuite>
+        <testsuite name="asimetric">
+            <directory>./tests/http</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
