@@ -12,14 +12,12 @@ class UtilTest extends TestCase {
 
     protected $jwt;
     protected $datos;
-    protected $uid = 123456;
-
 
     protected function setUp()
     {
         $this->jwt = new Util();
 
-        $this->datos = ['uid'=> $this->uid, 'name'=> 'my user name' ];
+        $this->datos = ['uid'=> 123456, 'name'=> 'my user name' ];
     }
 
     public function testEncodeSimetricHS512()
@@ -60,7 +58,7 @@ class UtilTest extends TestCase {
 
     public function testEncodeAsimetricRS256()
     {
-        $keyAsimetrica = __DIR__.'/../../assets/server.key';
+        $keyAsimetrica = realpath(__DIR__.'/../../assets/server.key');
 
         $tokenEsperado = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1aWQiOjEyMzQ1NiwibmFtZSI6Im15IHVzZXIgbmFtZSJ9.bQCLJy_VbMy5RoGKxRkXMFAatVZG0FLGrElfW7zu4iE54TpGg8_YEjw62IUcplPpqiDIcLllpYFtliV6TJrsYA';
 
@@ -80,7 +78,7 @@ class UtilTest extends TestCase {
      */
     public function testDecodeAsimetricRS256($token)
     {
-        $keyAsimetrica = __DIR__.'/../../assets/server.key';
+        $keyAsimetrica = realpath(__DIR__.'/../../assets/server.pem');
 
         $asimetricDecoder = new AsimetricDecoder(Util::ALG_RS256, $keyAsimetrica);
 
