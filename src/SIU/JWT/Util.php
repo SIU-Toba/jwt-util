@@ -13,6 +13,7 @@ class Util
     const ALG_HS384 = 'HS384';
     const ALG_HS512 = 'HS512';
     const ALG_RS256 = 'RS256';
+    const ALG_RS512 = 'RS512';
 
     private $encoder;
     private $decoder;

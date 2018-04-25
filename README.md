@@ -63,6 +63,7 @@ Los algoritmos y métodos soportados son:
 |HS384|simétrico|
 |HS512|simétrico|
 |RS256|asimétrico|
+|RS512|asimétrico|
 
 Para generar tokens con el método asimétrico, se requieren de claves público/privadas.
 Se puede generar algunas de prueba de la siguiente forma:
@@ -71,3 +72,5 @@ Se puede generar algunas de prueba de la siguiente forma:
     openssl genrsa 512 > server.key
     openssl rsa -pubout < server.key > server.pem
 ```
+
+Nota: esto genera claves para RS256, para RS512 usar `genrsa 1024`
