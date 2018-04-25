@@ -90,4 +90,39 @@ class UtilTest extends TestCase {
 
         $this->assertEquals($this->datos['name'], $data->name);
     }
+
+    public function testEncodeAsimetricRS512()
+    {
+        $keyAsimetrica = realpath(__DIR__.'/../../assets/server2.key');
+
+        $tokenEsperado = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzUxMiJ9.eyJ1aWQiOjEyMzQ1NiwibmFtZSI6Im15IHVzZXIgbmFtZSJ9.nXrqoNNIC0oHQQ8i5cL5wU0btk7Dqogn9CBzcTIfMhyowjy9DsA2tXckmCBfC8un6PrzyoLnt79gz3Vjlbw9js82aLUtH-N_eUnl0c3hGvIZbqWBsA11iYtpG67Dea7HoI6DKOkhXy8ak8FzMyuJ1d7LcJsFBcvVYNam_Y2VeDQ';
+
+        $asimetricEncoder = new AsimetricEncoder(Util::ALG_RS512, $keyAsimetrica, $this->datos);
+
+        $this->jwt->setEncoder($asimetricEncoder);
+
+        $token = $this->jwt->encode();
+
+        $this->assertEquals($tokenEsperado, $token);
+
+        return $token;
+    }
+
+    /**
+     * @depends testEncodeAsimetricRS512
+     */
+    public function testDecodeAsimetricRS512($token)
+    {
+        $keyAsimetrica = realpath(__DIR__.'/../../assets/server2.pem');
+
+        $asimetricDecoder = new AsimetricDecoder('RS512', $keyAsimetrica);
+
+        $this->jwt->setDecoder($asimetricDecoder);
+
+        $data = $this->jwt->decode($token);
+
+        $this->assertEquals($this->datos['uid'], $data->uid);
+
+        $this->assertEquals($this->datos['name'], $data->name);
+    }
 }
