@@ -1,19 +1,9 @@
-<phpunit bootstrap="vendor/autoload.php"
-         colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         processIsolation="false"
-         stopOnFailure="false">
-    <testsuites>
-        <testsuite name="all">
-            <directory>./tests</directory>
-        </testsuite>
-        <testsuite name="simetric">
-            <directory>./tests/http</directory>
-        </testsuite>
-        <testsuite name="asimetric">
-            <directory>./tests/http</directory>
-        </testsuite>
-    </testsuites>
+<?xml version="1.0"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="vendor/autoload.php" colors="true" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true" processIsolation="false" stopOnFailure="false" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+  <coverage/>
+  <testsuites>
+    <testsuite name="all">
+      <directory>tests/SIU/JWT</directory>
+    </testsuite>
+  </testsuites>
 </phpunit>
