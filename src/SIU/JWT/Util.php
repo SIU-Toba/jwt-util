@@ -9,11 +9,11 @@ use SIU\JWT\Decoder\AbstractDecoder;
 class Util
 {
     // JWT::$supported_algs
-    const ALG_HS256 = 'HS256';
-    const ALG_HS384 = 'HS384';
-    const ALG_HS512 = 'HS512';
-    const ALG_RS256 = 'RS256';
-    const ALG_RS512 = 'RS512';
+    public const ALG_HS256 = 'HS256';
+    public const ALG_HS384 = 'HS384';
+    public const ALG_HS512 = 'HS512';
+    public const ALG_RS256 = 'RS256';
+    public const ALG_RS512 = 'RS512';
 
     private $encoder;
     private $decoder;
@@ -57,6 +57,6 @@ class Util
             throw new \Exception('Debe setear un decoder primero.');
         }
 
-        return JWT::decode($jwt, $this->decoder->getKey(), array($this->decoder->getAlgorithm()));
+        return JWT::decode($jwt, $this->decoder->getKeyObject());
     }
 }
