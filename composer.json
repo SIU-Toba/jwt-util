@@ -2,7 +2,6 @@
     "name": "siu-toba/jwt-util",
     "description": "Una pequeña librería que autentica con Web Tokens JSON (JWT)",
     "homepage": "http://www.siu.edu.ar",
-    "license": "SIU",
     "authors": [
         {
             "name": "Sistema de Información Universitaria - SIU",
