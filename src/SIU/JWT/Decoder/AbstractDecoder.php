@@ -3,6 +3,7 @@
 namespace SIU\JWT\Decoder;
 
 use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 abstract class AbstractDecoder
 {
@@ -35,6 +36,17 @@ abstract class AbstractDecoder
     public function getAlgorithm()
     {
         return $this->algorithm;
+    }
+
+    /**
+     * @return Key
+     */
+    public function getKeyObject()
+    {
+        $key = $this->getKey();
+        $algo = $this->getAlgorithm();
+
+        return new Key($key, $algo);
     }
 
     abstract public function getKey();

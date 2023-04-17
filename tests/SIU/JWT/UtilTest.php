@@ -1,4 +1,5 @@
 <?php
+
 namespace SIU\JWT\Test;
 
 use PHPUnit\Framework\TestCase;
@@ -8,12 +9,12 @@ use SIU\JWT\Encoder\SimetricEncoder;
 use SIU\JWT\Decoder\AsimetricDecoder;
 use SIU\JWT\Decoder\SimetricDecoder;
 
-class UtilTest extends TestCase {
-
+class UtilTest extends TestCase
+{
     protected $jwt;
     protected $datos;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->jwt = new Util();
 
