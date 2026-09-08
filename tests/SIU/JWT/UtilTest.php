@@ -2,6 +2,7 @@
 
 namespace SIU\JWT\Test;
 
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
 use SIU\JWT\Util;
 use SIU\JWT\Encoder\AsimetricEncoder;
@@ -18,7 +19,6 @@ class UtilTest extends TestCase
     protected function setUp(): void
     {
         $this->jwt = new Util();
-
         $this->datos = ['uid' => 123456, 'name' => 'my user name' ];
 
         for($i = 1; $i < 1000; $i++) {
@@ -26,7 +26,7 @@ class UtilTest extends TestCase
         }
     }
 
-    public function testEncodeSimetricHS512()
+    public function testEncodeSimetricHS512():string
     {
         $keySimetrica =  $this->keyLocal;
 
@@ -43,10 +43,8 @@ class UtilTest extends TestCase
         return $token;
     }
 
-    /**
-     * @depends testEncodeSimetricHS512
-     */
-    public function testDecodeSimetricHS512($token)
+    #[Depends('testEncodeSimetricHS512')]
+    public function testDecodeSimetricHS512(string $token):void
     {
         $keySimetrica = $this->keyLocal;
 
@@ -62,7 +60,7 @@ class UtilTest extends TestCase
     }
 
 
-    public function testEncodeAsimetricRS256()
+    public function testEncodeAsimetricRS256():string
     {
         $keyAsimetrica = realpath(__DIR__.'/../../assets/server.key');
 
@@ -79,10 +77,8 @@ class UtilTest extends TestCase
         return $token;
     }
 
-    /**
-     * @depends testEncodeAsimetricRS256
-     */
-    public function testDecodeAsimetricRS256($token)
+    #[Depends('testEncodeAsimetricRS256')]    
+    public function testDecodeAsimetricRS256(string $token):void
     {
         $keyAsimetrica = realpath(__DIR__.'/../../assets/server.pem');
 
@@ -97,7 +93,7 @@ class UtilTest extends TestCase
         $this->assertEquals($this->datos['name'], $data->name);
     }
 
-    public function testEncodeAsimetricRS512()
+    public function testEncodeAsimetricRS512():string
     {
         $keyAsimetrica = realpath(__DIR__.'/../../assets/server2.key');
 
@@ -114,10 +110,8 @@ class UtilTest extends TestCase
         return $token;
     }
 
-    /**
-     * @depends testEncodeAsimetricRS512
-     */
-    public function testDecodeAsimetricRS512($token)
+    #[Depends('testEncodeAsimetricRS512')]        
+    public function testDecodeAsimetricRS512(string $token):void
     {
         $keyAsimetrica = realpath(__DIR__.'/../../assets/server2.pem');
 
@@ -130,6 +124,4 @@ class UtilTest extends TestCase
         $this->assertEquals($this->datos['uid'], $data->uid);
         $this->assertEquals($this->datos['name'], $data->name);
     }
-
-
 }
